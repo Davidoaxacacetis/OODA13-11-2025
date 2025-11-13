@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Detalles del alimento{% endblock %}
+
+{% block content %}
+{% if alimento %}
+<div class="card shadow-sm p-4">
+    <h2>{{ alimento.description }}</h2>
+    <hr>
+
+    <h4>💪 Nutrientes</h4>
+    <ul class="list-group mb-4">
+        {% for nutriente in alimento.foodNutrients %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ nutriente.name }}
+            <span class="badge bg-primary rounded-pill">
+                {{ nutriente.amount }} {{ nutriente.unitName }}
+            </span>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h4>🥄 Porciones disponibles</h4>
+    <ul class="list-group">
+        {% for porcion in alimento.foodPortions %}
+        <li class="list-group-item">
+            {{ porcion.portionDescription }} — <em>{{ porcion.gramWeight }} g</em>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <div class="mt-4">
+        <a href="/" class="btn btn-secondary">⬅ Volver a la búsqueda</a>
+    </div>
+</div>
+{% else %}
+<div class="alert alert-danger">No se pudo cargar la información del alimento.</div>
+{% endif %}
+{% endblock %}
