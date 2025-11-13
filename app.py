@@ -3,7 +3,6 @@ import requests
 
 app = Flask(__name__)
 
-# Tu clave API del USDA (recomendado luego pasarla a variable de entorno)
 API_KEY = "udJqwbKLuDZTGgIEmmOlAre5tV47sjQ5ichJxxQO"
 
 @app.route("/", methods=["GET", "POST"])
