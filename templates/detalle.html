@@ -1,24 +1,30 @@
 {% extends "base.html" %}
 
+
 {% block title %}Detalles del alimento{% endblock %}
+
 
 {% block content %}
 {% if alimento %}
 <div class="card shadow-sm p-4">
     <h2>{{ alimento.description }}</h2>
+    <p><strong>Tipo:</strong> {{ tipos[alimento.dataType] if alimento.dataType in tipos else alimento.dataType }}</p>
     <hr>
+
 
     <h4>💪 Nutrientes</h4>
     <ul class="list-group mb-4">
         {% for nutriente in alimento.foodNutrients %}
         <li class="list-group-item d-flex justify-content-between align-items-center">
-            {{ nutriente.name }}
+            {{ nutriente.nutrient.name }}
             <span class="badge bg-primary rounded-pill">
-                {{ nutriente.amount }} {{ nutriente.unitName }}
+                {% if nutriente.amount is not none %}{{ nutriente.amount }} {{ nutriente.nutrient.unitName }}{% else
+                %}No disponible{% endif %}
             </span>
         </li>
         {% endfor %}
     </ul>
+
 
     <h4>🥄 Porciones disponibles</h4>
     <ul class="list-group">
@@ -28,6 +34,7 @@
         </li>
         {% endfor %}
     </ul>
+
 
     <div class="mt-4">
         <a href="/" class="btn btn-secondary">⬅ Volver a la búsqueda</a>
